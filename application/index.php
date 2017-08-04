@@ -31,21 +31,13 @@ if ($result === false) {
     $visitors = $result['count'];
 }
 
-++$visitors;
-
-?>
-
-<h1>Docker demo</h1>
-
-<h2>Page <?php echo $page ?></h2>
-
-<p><?php echo "You are {$visitors}. visitor" ?></p>
-
-<?php
-
 $statement = $pdo->prepare('UPDATE `visitors` SET `count` = `count` + 1 WHERE `page` = :page');
 
 $statement->bindParam(':page', $page);
 
 $statement->execute();
+
+$visitor = $visitors + 1;
+
+include_once('./view.php');
 
